@@ -7,81 +7,207 @@
     android:layout_height="match_parent"
     tools:context=".GameActivity">
 
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:id="@+id/row1"
+            android:layout_width="80dp"
+            android:layout_height="110dp">
+
+            <Button
+                android:id="@+id/btn1"
+                android:layout_width="80dp"
+                android:layout_height="110dp"
+                android:backgroundTint="#BE8EFF" />
+
+            <Button
+                android:id="@+id/btn2"
+                android:layout_width="80dp"
+                android:layout_height="110dp"
+                android:backgroundTint="#BE8EFF" />
+
+            <Button
+                android:id="@+id/btn3"
+                android:layout_width="80dp"
+                android:layout_height="110dp"
+                android:backgroundTint="#BE8EFF" />
+
+            <Button
+                android:id="@+id/btn4"
+                android:layout_width="80dp"
+                android:layout_height="110dp"
+                android:backgroundTint="#BE8EFF" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/row2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn5"
+                android:layout_width="80dp"
+                android:layout_height="110dp"
+                android:backgroundTint="#BE8EFF" />
+
+            <Button
+                android:id="@+id/btn6"
+                android:layout_width="80dp"
+                android:layout_height="110dp"
+                android:backgroundTint="#BE8EFF" />
+
+            <Button
+                android:id="@+id/btn7"
+                android:layout_width="80dp"
+                android:layout_height="110dp"
+                android:backgroundTint="#BE8EFF" />
+
+            <Button
+                android:id="@+id/btn8"
+                android:layout_width="80dp"
+                android:layout_height="110dp"
+                android:backgroundTint="#BE8EFF" />
+
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/row3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn9"
+                android:layout_width="80dp"
+                android:layout_height="110dp"
+                android:backgroundTint="#BE8EFF" />
+
+            <Button
+                android:id="@+id/btn10"
+                android:layout_width="80dp"
+                android:layout_height="110dp"
+                android:backgroundTint="#BE8EFF" />
+
+            <Button
+                android:id="@+id/btn11"
+                android:layout_width="80dp"
+                android:layout_height="110dp"
+                android:backgroundTint="#BE8EFF" />
+
+            <Button
+                android:id="@+id/btn12"
+                android:layout_width="80dp"
+                android:layout_height="110dp"
+                android:backgroundTint="#BE8EFF" />
+
+
+
+        </TableRow>
+
+
+        <TableRow
+            android:id="@+id/row4"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn13"
+                android:layout_width="80dp"
+                android:layout_height="110dp"
+                android:backgroundTint="#BE8EFF" />
+
+            <Button
+                android:id="@+id/btn14"
+                android:layout_width="80dp"
+                android:layout_height="110dp"
+                android:backgroundTint="#BE8EFF" />
+
+            <Button
+                android:id="@+id/btn15"
+                android:layout_width="80dp"
+                android:layout_height="110dp"
+                android:backgroundTint="#BE8EFF" />
+
+            <Button
+                android:id="@+id/btn16"
+                android:layout_width="80dp"
+                android:layout_height="110dp"
+                android:backgroundTint="#BE8EFF" />
+
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/row5"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn17"
+                android:layout_width="80dp"
+                android:layout_height="110dp"
+                android:backgroundTint="#BE8EFF" />
+
+            <Button
+                android:id="@+id/btn18"
+                android:layout_width="80dp"
+                android:layout_height="110dp"
+                android:backgroundTint="#BE8EFF" />
+
+            <Button
+                android:id="@+id/btn19"
+                android:layout_width="80dp"
+                android:layout_height="110dp"
+                android:backgroundTint="#BE8EFF" />
+
+            <Button
+                android:id="@+id/btn20"
+                android:layout_width="80dp"
+                android:layout_height="110dp"
+                android:backgroundTint="#BE8EFF" />
+
+        </TableRow>
+    </TableLayout>
+
     <Button
         android:id="@+id/btnTryAgain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginEnd="199dp"
-        android:layout_marginBottom="201dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginBottom="68dp"
+        android:scaleType="fitXY"
         android:text="TRY AGAIN" />
 
     <Button
-        android:id="@+id/btn2"
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="156dp"
-        android:text="Button" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="26dp"
+        android:layout_marginBottom="70dp"
+        android:layout_toEndOf="@+id/btnTryAgain"
+        android:scaleType="fitXY"
+        android:text="1" />
 
     <Button
-        android:id="@+id/btn3"
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="171dp"
-        android:layout_marginEnd="27dp"
-        android:text="Button" />
-
-    <TextView
-        android:id="@+id/tv2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="75dp"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/tv3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="268dp"
-        android:layout_marginTop="325dp"
-        android:text="TextView" />
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="center"
-        android:layout_marginStart="0dp">
-
-
-        <TextView
-            android:id="@+id/tv1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="test textView" />
-
-        <Button
-            android:id="@+id/btn1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="Button" />
-
-
-    </FrameLayout>
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="33dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="68dp"
+        android:layout_toEndOf="@+id/button"
+        android:scaleType="fitXY"
+        android:text="2" />
 
 
 </RelativeLayout>
