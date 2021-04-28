@@ -20,25 +20,25 @@
             <Button
                 android:id="@+id/btn1"
                 android:layout_width="80dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:backgroundTint="#BE8EFF" />
 
             <Button
                 android:id="@+id/btn2"
                 android:layout_width="80dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:backgroundTint="#BE8EFF" />
 
             <Button
                 android:id="@+id/btn3"
                 android:layout_width="80dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:backgroundTint="#BE8EFF" />
 
             <Button
                 android:id="@+id/btn4"
                 android:layout_width="80dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:backgroundTint="#BE8EFF" />
 
         </TableRow>
@@ -51,25 +51,25 @@
             <Button
                 android:id="@+id/btn5"
                 android:layout_width="80dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:backgroundTint="#BE8EFF" />
 
             <Button
                 android:id="@+id/btn6"
                 android:layout_width="80dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:backgroundTint="#BE8EFF" />
 
             <Button
                 android:id="@+id/btn7"
                 android:layout_width="80dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:backgroundTint="#BE8EFF" />
 
             <Button
                 android:id="@+id/btn8"
                 android:layout_width="80dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:backgroundTint="#BE8EFF" />
 
 
@@ -83,25 +83,25 @@
             <Button
                 android:id="@+id/btn9"
                 android:layout_width="80dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:backgroundTint="#BE8EFF" />
 
             <Button
                 android:id="@+id/btn10"
                 android:layout_width="80dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:backgroundTint="#BE8EFF" />
 
             <Button
                 android:id="@+id/btn11"
                 android:layout_width="80dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:backgroundTint="#BE8EFF" />
 
             <Button
                 android:id="@+id/btn12"
                 android:layout_width="80dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:backgroundTint="#BE8EFF" />
 
 
@@ -117,25 +117,25 @@
             <Button
                 android:id="@+id/btn13"
                 android:layout_width="80dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:backgroundTint="#BE8EFF" />
 
             <Button
                 android:id="@+id/btn14"
                 android:layout_width="80dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:backgroundTint="#BE8EFF" />
 
             <Button
                 android:id="@+id/btn15"
                 android:layout_width="80dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:backgroundTint="#BE8EFF" />
 
             <Button
                 android:id="@+id/btn16"
                 android:layout_width="80dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:backgroundTint="#BE8EFF" />
 
 
@@ -149,25 +149,25 @@
             <Button
                 android:id="@+id/btn17"
                 android:layout_width="80dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:backgroundTint="#BE8EFF" />
 
             <Button
                 android:id="@+id/btn18"
                 android:layout_width="80dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:backgroundTint="#BE8EFF" />
 
             <Button
                 android:id="@+id/btn19"
                 android:layout_width="80dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:backgroundTint="#BE8EFF" />
 
             <Button
                 android:id="@+id/btn20"
                 android:layout_width="80dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:backgroundTint="#BE8EFF" />
 
         </TableRow>
@@ -179,35 +179,52 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="17dp"
-        android:layout_marginBottom="68dp"
+        android:layout_marginStart="214dp"
+        android:layout_marginBottom="86dp"
         android:scaleType="fitXY"
         android:text="TRY AGAIN" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="26dp"
-        android:layout_marginBottom="70dp"
-        android:layout_toEndOf="@+id/btnTryAgain"
-        android:scaleType="fitXY"
-        android:text="1" />
-
-    <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnEndGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="33dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="68dp"
-        android:layout_toEndOf="@+id/button"
-        android:scaleType="fitXY"
-        android:text="2" />
+        android:layout_marginEnd="66dp"
+        android:layout_marginBottom="37dp"
+        android:text="END GAME" />
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="47dp"
+        android:layout_marginBottom="101dp"
+        android:text="SCORE:"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="116dp"
+        android:layout_marginBottom="99dp"
+        android:text="0"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnNewGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="35dp"
+        android:layout_marginBottom="39dp"
+        android:text="NEW GAME" />
 
 
 </RelativeLayout>
