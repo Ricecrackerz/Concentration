@@ -20,8 +20,8 @@ public class GameActivity extends AppCompatActivity {
     public static int clicks = 0;
     public static int firstClicked = -1, lastClicked = -1;
     public static int firstImage = 0, secondImage = 0;
-    public static int score = 0;
-    public static int game;
+    public static int points = 0;
+    public static int gameSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +54,8 @@ public class GameActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
 
         if (extras != null){
-            game = extras.getInt("num");
+            gameSize = extras.getInt("num");
         }
-        System.out.println(game);
 
         ArrayList<Integer> images = new ArrayList<>();
 
@@ -89,10 +88,6 @@ public class GameActivity extends AppCompatActivity {
         images.add(R.drawable.tinykirby);
         images.add(R.drawable.tinykirby);
         images.add(R.drawable.tinykirby);
-        images.add(R.drawable.tinykirby);
-        images.add(R.drawable.tinykirby);
-        images.add(R.drawable.tony);
-        images.add(R.drawable.tony);
 
         int cardBack = R.drawable.cardback;
 
@@ -100,78 +95,85 @@ public class GameActivity extends AppCompatActivity {
                 R.id.btn10,R.id.btn11,R.id.btn12,R.id.btn13,R.id.btn14,R.id.btn15,R.id.btn16,R.id.btn17,R.id.btn18,
                 R.id.btn19,R.id.btn20};
 
-        Button buttons[] = new Button[];
+        Button buttons[] = new Button[idButton.length];
 
-        for(int i = 0; i < 20 - game; i++){
-            buttons[i] = (Button) findViewById(idButton[i]);
-            buttons[i].setVisibility(View.GONE);
+        for(int i = 0; i < idButton.length; i++){
+            if(i > gameSize - 1){
+                buttons[i] = (Button) findViewById(idButton[i]);
+                buttons[i].setVisibility(View.INVISIBLE);
+            }
         }
 
-        Collections.shuffle(Collections.singletonList(images.get(0) - images.get(game - 1)));
+        //Collections.shuffle(Collections.singletonList(images.get(0) - images.get(game - 1)));
+        Collections.shuffle(images.subList(0, gameSize - 1 ));
 
-        for(int i = 0; i < buttons.length-1; i++){
+        for(int i = 0; i < idButton.length; i++){
 
             buttons[i] = (Button) findViewById(idButton[i]);
             buttons[i].setCompoundDrawablesWithIntrinsicBounds(cardBack, 0, 0, 0);
             int finalI = i;
-            buttons[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(buttons[finalI].isClickable() == true && clicks < 2) {
-                        buttons[finalI].setCompoundDrawablesWithIntrinsicBounds(images.get(finalI), 0, 0, 0);
-                        buttons[finalI].setClickable(false);
+            if (buttons[i].getVisibility() != View.INVISIBLE){
+                buttons[i].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(buttons[finalI].isClickable() == true && clicks < 2) {
+                            buttons[finalI].setCompoundDrawablesWithIntrinsicBounds(images.get(finalI), 0, 0, 0);
+                            buttons[finalI].setClickable(false);
 
-                        if (clicks == 0) {
-                            firstImage = images.get(finalI);
-                            firstClicked = finalI;
-                            System.out.println(firstImage);
-                        } else if (clicks == 1) {
-                            secondImage = images.get(finalI);
-                            lastClicked = finalI;
-                            System.out.println(secondImage);
+                            if (clicks == 0) {
+                                firstImage = images.get(finalI);
+                                firstClicked = finalI;
+                            } else if (clicks == 1) {
+                                secondImage = images.get(finalI);
+                                lastClicked = finalI;
+                            }
+                            clicks++;
                         }
-                        clicks++;
+                        if (clicks == 2) {
+                            if (firstImage != secondImage){
+                                System.out.println(":(");
+                                buttons[firstClicked].setClickable(false);
+                                buttons[lastClicked].setClickable(false);
+                                if (points == 0){
+                                    tvScore.setText("0");
+                                }
+                                else {
+                                    points -= 1;
+                                    tvScore.setText(String.valueOf(points));
+                                }
+
+                            }
+                            else if (firstImage == secondImage){
+                                System.out.println("lets go");
+                                buttons[firstClicked].setClickable(false);
+                                buttons[lastClicked].setClickable(false);
+                                clicks = 0;
+                                firstImage = 0;
+                                secondImage = 0;
+                                points += 2;
+                                tvScore.setText(String.valueOf(points));
+                            }
+                        }
                     }
-                    if (clicks == 2) {
-                         if (firstImage != secondImage){
-                             System.out.println(":(");
-                             buttons[firstClicked].setClickable(false);
-                             buttons[lastClicked].setClickable(false);
-                             if (score == 0){
-                                tvScore.setText("0");
-                            }
-                            else {
-                                score -= 1;
-                                tvScore.setText(String.valueOf(score));
-                            }
+                });
 
-                        }
-                        else if (firstImage == secondImage){
-                            System.out.println("lets");
-                            buttons[firstClicked].setClickable(false);
-                            buttons[lastClicked].setClickable(false);
+                btnTryAgain.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(clicks == 2){
+                            buttons[firstClicked].setCompoundDrawablesWithIntrinsicBounds(cardBack, 0, 0, 0);
+                            buttons[lastClicked].setCompoundDrawablesWithIntrinsicBounds(cardBack, 0, 0, 0);
+                            buttons[firstClicked].setClickable(true);
+                            buttons[lastClicked].setClickable(true);
                             clicks = 0;
-                            firstImage = 0;
-                            secondImage = 0;
-                            score += 2;
-                            tvScore.setText(String.valueOf(score));
                         }
                     }
-                }
-            });
+                });
+            }
+            else{
+                System.out.println("hi");
+            }
 
-            btnTryAgain.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(clicks == 2){
-                        buttons[firstClicked].setCompoundDrawablesWithIntrinsicBounds(cardBack, 0, 0, 0);
-                        buttons[lastClicked].setCompoundDrawablesWithIntrinsicBounds(cardBack, 0, 0, 0);
-                        buttons[firstClicked].setClickable(true);
-                        buttons[lastClicked].setClickable(true);
-                        clicks = 0;
-                    }
-                }
-            });
         }
 
         btnEndGame.setOnClickListener(new View.OnClickListener() {
@@ -183,7 +185,18 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
+        btnNewGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goGameActivity();
+            }
+        });
+    }
 
+    private void goGameActivity() {
+        Intent i = new Intent(this, GameActivity.class);
+        startActivity(i);
+        finish();
     }
 
 }
