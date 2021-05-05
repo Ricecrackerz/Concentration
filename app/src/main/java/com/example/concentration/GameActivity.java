@@ -1,13 +1,18 @@
 package com.example.concentration;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -22,6 +27,10 @@ public class GameActivity extends AppCompatActivity {
     public static int firstImage = 0, secondImage = 0;
     public static int points = 0;
     public static int gameSize;
+    public static String BUTTON_OFF = "button_off";
+    public static Button buttons[] = new Button[20];
+    public static ArrayList<Integer> images = new ArrayList<>();
+    public static TextView tvScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +66,9 @@ public class GameActivity extends AppCompatActivity {
             gameSize = extras.getInt("num");
         }
 
-        ArrayList<Integer> images = new ArrayList<>();
 
         Button btnTryAgain, btnNewGame, btnEndGame;
-        TextView tv, tvScore;
+        TextView tv;
 
         btnTryAgain = (Button) findViewById(R.id.btnTryAgain);
         btnNewGame = (Button) findViewById(R.id.btnNewGame);
@@ -95,7 +103,7 @@ public class GameActivity extends AppCompatActivity {
                 R.id.btn10,R.id.btn11,R.id.btn12,R.id.btn13,R.id.btn14,R.id.btn15,R.id.btn16,R.id.btn17,R.id.btn18,
                 R.id.btn19,R.id.btn20};
 
-        Button buttons[] = new Button[idButton.length];
+
 
         for(int i = 0; i < idButton.length; i++){
             if(i > gameSize - 1){
@@ -106,6 +114,16 @@ public class GameActivity extends AppCompatActivity {
 
         //Collections.shuffle(Collections.singletonList(images.get(0) - images.get(game - 1)));
         Collections.shuffle(images.subList(0, gameSize - 1 ));
+
+
+        /*SharedPreferences sharedPreferences = getSharedPreferences();
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+
+        sharedPreferences = getSharedPreferences();
+
+        edit.putBoolean("focus_value", false);
+        edit.putBoolean("auto_value", false);
+        edit.commit();*/
 
         for(int i = 0; i < idButton.length; i++){
 
@@ -191,12 +209,47 @@ public class GameActivity extends AppCompatActivity {
                 goGameActivity();
             }
         });
+
+        /*if(savedInstanceState != null){
+            savedInstanceState.getInt("points");
+            tvScore.setText(String.valueOf(points));
+            buttons = (Button[]) savedInstanceState.getSerializable("buttons");
+            images = (ArrayList<Integer>) savedInstanceState.getSerializable("images");
+
+        }*/
     }
 
     private void goGameActivity() {
         Intent i = new Intent(this, GameActivity.class);
         startActivity(i);
         finish();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("points", points);
+        outState.putSerializable("buttons", buttons);
+        outState.putSerializable("images", images);
+    }
+
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        savedInstanceState.getInt("points");
+        tvScore.setText(String.valueOf(points));
+        buttons = (Button[]) savedInstanceState.getSerializable("buttons");
+        images = (ArrayList<Integer>) savedInstanceState.getSerializable("images");
+
+        for(int i = 0; i <buttons.length; i++){
+            buttons[i].setCompoundDrawablesWithIntrinsicBounds(images.get(i), 0, 0, 0);
+        }
+
+        super.onRestoreInstanceState(savedInstanceState);
+
+       /* savedInstanceState.getInt("points");
+        savedInstanceState.getSerializable("buttons");*/
     }
 
 }

@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void afterTextChanged(Editable s) {
         gameSize = Integer.parseInt(s.toString());
-        if (gameSize >= 2 && gameSize <20){
+        if (gameSize >= 2 && gameSize <=20){
             if(gameSize%2 == 0){
                 goGameActivity();
             }
