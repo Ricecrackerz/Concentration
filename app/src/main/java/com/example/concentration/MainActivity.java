@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     private void goDialogBox() {
 
         final EditText etNumber = new EditText(MainActivity.this);
-        final Button btnSubmit = new Button(MainActivity.this);
 
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         alertDialog.setTitle("Choose an even number between 2 and 20");

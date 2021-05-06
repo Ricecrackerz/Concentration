@@ -5,18 +5,20 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -33,8 +35,9 @@ public class GameActivity extends AppCompatActivity {
     public static int flags[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     public static int selectedCards[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     public static ArrayList<Integer> images = new ArrayList<>();
-    public static TextView tvScore;
     public static boolean check = false;
+    TextView tvScore;
+    Button btnTryAgain, btnNewGame, btnEndGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,12 @@ public class GameActivity extends AppCompatActivity {
             gameSize = extras.getInt("num");
         }
 
+        btnTryAgain = (Button) findViewById(R.id.btnTryAgain);
+        btnNewGame = (Button) findViewById(R.id.btnNewGame);
+        btnEndGame = (Button) findViewById(R.id.btnEndGame);
+        tvScore = (TextView) findViewById(R.id.tvScore);
+
+        int cardBack = R.drawable.cardback;
 
         images.add(R.drawable.bird);
         images.add(R.drawable.bird);
@@ -70,21 +79,9 @@ public class GameActivity extends AppCompatActivity {
         images.add(R.drawable.rat);
 
         if (!check){
-            //Collections.shuffle(images);
             Collections.shuffle(images.subList(0, gameSize - 1 ));
             check = true;
         }
-
-        Button btnTryAgain, btnNewGame, btnEndGame;
-        TextView tv;
-
-        btnTryAgain = (Button) findViewById(R.id.btnTryAgain);
-        btnNewGame = (Button) findViewById(R.id.btnNewGame);
-        btnEndGame = (Button) findViewById(R.id.btnEndGame);
-        tv = (TextView) findViewById(R.id.tv);
-        tvScore = (TextView) findViewById(R.id.tvScore);
-
-        int cardBack = R.drawable.cardback;
 
         int [] idButton = {R.id.btn1, R.id.btn2,R.id.btn3,R.id.btn4,R.id.btn5,R.id.btn6,R.id.btn7,R.id.btn8, R.id.btn9,
                 R.id.btn10,R.id.btn11,R.id.btn12,R.id.btn13,R.id.btn14,R.id.btn15,R.id.btn16,R.id.btn17,R.id.btn18,
@@ -95,11 +92,7 @@ public class GameActivity extends AppCompatActivity {
                 buttons[i] = (ImageButton) findViewById(idButton[i]);
                 buttons[i].setVisibility(View.INVISIBLE);
             }
-
         }
-
-        //Collections.shuffle(Collections.singletonList(images.get(0) - images.get(game - 1)));
-
 
         for(int i = 0; i < idButton.length; i++){
 
@@ -196,11 +189,9 @@ public class GameActivity extends AppCompatActivity {
         btnNewGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goGameActivity();
+                restartGameActivity();
             }
-
         });
-
 
         if(savedInstanceState != null){
             savedInstanceState.getInt("points");
@@ -213,28 +204,78 @@ public class GameActivity extends AppCompatActivity {
 
             for(int i = 0; i < buttons.length; i++){
                 if (flags[i] == 1){
-                    System.out.println(i);
                     buttons[i].setImageResource(images.get(i));
                     buttons[i].setClickable(false);
                 }
                 if (selectedCards[i] == 1){
                     buttons[i].setImageResource(images.get(i));
                 }
-
             }
-
         }
     }
 
     private void gotoEndScreen() {
         Intent i = new Intent(this, EndScreenActivty.class);
-        System.out.println(Arrays.toString(flags));
+        i.putExtra("points", points);
         startActivity(i);
         finish();
     }
 
+    private void restartGameActivity() {
+
+        final EditText etNumber = new EditText(GameActivity.this);
+
+        AlertDialog alertDialog = new AlertDialog.Builder(GameActivity.this).create();
+        alertDialog.setTitle("Choose an even number between 2 and 20");
+        alertDialog.setView(etNumber);
+        etNumber.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+        Editable number = etNumber.getText();
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                afterTextChanged(number);
+            }
+        });
+
+        alertDialog.show();
+
+    }
+
+    private void afterTextChanged(Editable number) {
+        gameSize = Integer.parseInt(number.toString());
+        if (gameSize >= 2 && gameSize <=20){
+            if(gameSize%2 == 0){
+                counter = 0;
+                clicks = 0;
+                firstClicked = -1;
+                lastClicked = -1;
+                firstImage = 0;
+                secondImage = 0;
+                points = 0;
+                counter = 0;
+                check = false;
+                Collections.sort(images);
+                for(int i = 0; i < buttons.length; i++){
+                    flags[i] = 0;
+                    selectedCards[i] = 0;
+                }
+                goGameActivity();
+            }
+            else{
+                Toast.makeText(this, "OUT OF RANGE AND TRY AGAIN", Toast.LENGTH_SHORT).show();
+                restartGameActivity();
+            }
+        }
+        else{
+            Toast.makeText(this, "OUT OF RANGE AND TRY AGAIN", Toast.LENGTH_SHORT).show();
+            restartGameActivity();
+        }
+    }
+
     private void goGameActivity() {
         Intent i = new Intent(this, GameActivity.class);
+        i.putExtra("num", gameSize);
         startActivity(i);
         finish();
     }
@@ -250,9 +291,6 @@ public class GameActivity extends AppCompatActivity {
         outState.putBoolean("check", check);
 
         super.onSaveInstanceState(outState);
-        //outState.putSerializable("images", images);
     }
-
-
 
 }
