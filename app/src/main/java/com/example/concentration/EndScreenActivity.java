@@ -17,7 +17,14 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
-public class EndScreenActivty extends AppCompatActivity {
+/**
+ *  EndScreenActivity.java
+ *  Purpose:            To display the finalized score, the number of cards the user played and user's name after accepting the user's name from the dialogue box.
+ *                      If the score beats the current top 3 high scores, saves the new score and user's name into the external file scores.json to keep track of the
+ *                      top scores.
+ */
+// This is currently not working and crashes when prompted
+public class EndScreenActivity extends AppCompatActivity {
 
     public static int points, gameSize;
     public static String user;
@@ -26,7 +33,8 @@ public class EndScreenActivty extends AppCompatActivity {
     private Context mContext;
     private String mFilename;
 
-    public EndScreenActivty (Context c, String f){
+    // Needed constructor to save scores into file
+    public EndScreenActivity(Context c, String f){
         mContext = c;
         mFilename = f;
     }

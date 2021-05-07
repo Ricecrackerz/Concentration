@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.InputType;
 import android.view.View;
@@ -52,9 +50,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!isPlaying) {
+                    btnMusic.setText("Music ON");
                     mediaPlayer.play(MainActivity.this);
                     isPlaying = true;
                 } else {
+                    btnMusic.setText("Music OFF");
                     mediaPlayer.stop();
                     isPlaying = false;
                 }

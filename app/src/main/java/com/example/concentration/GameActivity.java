@@ -20,10 +20,19 @@ import android.widget.Toast;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
-
+/**
+ *  GameActitivity.java
+ *  Purpose:            The main logic of the card game is here. The game starts with an amount of cards requested by the player on the screen. After clicking
+ *                      the each card, it should reveal an animal and the player's goal is to find the matching animal on the rest of available cards. If a match
+ *                      is not found, player can click "Try Again" button to retry. Player can also start a new game or end game to view the result of all cards.
+ *                      The view of cards and instances remain unchanged when the device is rotated. The player gets 2pts for every correct pair and -1pt per incorrect
+ *                      pair.
+ *
+ *                      If the player completes the game, prompt a dialogue box to request player's name along with the final score. The next screen should be
+ *                      EndScreenActivity.java
+ */
 public class GameActivity extends AppCompatActivity {
 
     public static int clicks = 0, counter = 0;
@@ -51,13 +60,16 @@ public class GameActivity extends AppCompatActivity {
             gameSize = extras.getInt("num");
         }
 
+        // To identify the buttons and score to the corresponding widgets on the xml file
         btnTryAgain = (Button) findViewById(R.id.btnTryAgain);
         btnNewGame = (Button) findViewById(R.id.btnNewGame);
         btnEndGame = (Button) findViewById(R.id.btnEndGame);
         tvScore = (TextView) findViewById(R.id.tvScore);
 
+        // To display the cardBack and not reveal the animal
         int cardBack = R.drawable.cardback;
 
+        // Adding all 10 animals through images
         images.add(R.drawable.bird);
         images.add(R.drawable.bird);
         images.add(R.drawable.cat);
@@ -79,15 +91,18 @@ public class GameActivity extends AppCompatActivity {
         images.add(R.drawable.rat);
         images.add(R.drawable.rat);
 
+        // To prevent the game restarting when rotating the device
         if (!check){
             Collections.shuffle(images.subList(0, gameSize - 1 ));
             check = true;
         }
 
+        // Creating an ID list of buttons to allocate correct buttons with proper values
         int [] idButton = {R.id.btn1, R.id.btn2,R.id.btn3,R.id.btn4,R.id.btn5,R.id.btn6,R.id.btn7,R.id.btn8, R.id.btn9,
                 R.id.btn10,R.id.btn11,R.id.btn12,R.id.btn13,R.id.btn14,R.id.btn15,R.id.btn16,R.id.btn17,R.id.btn18,
                 R.id.btn19,R.id.btn20};
 
+        // To ensure the amount of cards are the same as the number the user requested
         for(int i = 0; i < idButton.length; i++){
             if(i > gameSize - 1){
                 buttons[i] = (ImageButton) findViewById(idButton[i]);
@@ -95,34 +110,38 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
-        for(int i = 0; i < idButton.length; i++){
-
+        // The logic to check if the match is correct
+        for(int i = 0; i < idButton.length; i++) {
             buttons[i] = (ImageButton) findViewById(idButton[i]);
             buttons[i].setImageResource(cardBack);
             int finalI = i;
 
-            if (buttons[i].getVisibility() != View.INVISIBLE){
+            if (buttons[i].getVisibility() != View.INVISIBLE) {
                 buttons[i].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        // The matching starts when there are 2 cards being clicked
                         if(buttons[finalI].isClickable() == true && clicks < 2) {
                             buttons[finalI].setImageResource(images.get(finalI));
                             buttons[finalI].setClickable(false);
 
+                            // To get data from the first card that the player chooses
                             if (clicks == 0) {
                                 firstImage = images.get(finalI);
                                 firstClicked = finalI;
                                 selectedCards[firstClicked] = 1;
                             } else if (clicks == 1) {
+                                // To get data from the second card that the player chooses
                                 secondImage = images.get(finalI);
                                 lastClicked = finalI;
                                 selectedCards[lastClicked] = 1;
                             }
                             clicks++;
                         }
+
+                        // To compare the 2 cards animals and update score
                         if (clicks == 2) {
-                            if (firstImage != secondImage){
-                                System.out.println(":(");
+                            if (firstImage != secondImage) {
                                 buttons[firstClicked].setClickable(false);
                                 buttons[lastClicked].setClickable(false);
                                 selectedCards[lastClicked] = 1;
@@ -137,7 +156,6 @@ public class GameActivity extends AppCompatActivity {
 
                             }
                             else if (firstImage == secondImage){
-                                System.out.println("lets go");
                                 buttons[firstClicked].setClickable(false);
                                 buttons[lastClicked].setClickable(false);
                                 flags[lastClicked] = 1;
@@ -147,6 +165,8 @@ public class GameActivity extends AppCompatActivity {
                                 secondImage = 0;
                                 points += 2;
                                 counter +=2;
+
+                                // Prompt the dialogue box when the player completed the game
                                 if(counter == gameSize){
                                     //gotoEndScreen();
                                     promptUsername();
@@ -157,6 +177,7 @@ public class GameActivity extends AppCompatActivity {
                     }
                 });
 
+                // Button clicked the retry a new match after choosing an incorrect match
                 btnTryAgain.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -172,23 +193,22 @@ public class GameActivity extends AppCompatActivity {
                     }
                 });
             }
-            else{
-                System.out.println("hi");
-            }
-
         }
 
+        // Button clicked the reveal all answers
         btnEndGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 for(int i = 0; i< idButton.length; i++){
-                    buttons[i].setImageResource(cardBack);
+                    int finalI = i;
+                    buttons[i].setImageResource(images.get(finalI));
                 }
-                gotoEndScreen();
+                //gotoEndScreen();
                 //promptUsername();
             }
         });
 
+        // Button clicked to start a new game
         btnNewGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -196,6 +216,7 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
+        // To ensure the game instance stays the same through different orientation
         if(savedInstanceState != null){
             savedInstanceState.getInt("points");
             savedInstanceState.getInt("counter");
@@ -217,6 +238,7 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    // To allow player's input as their name to save along with their score
     private void promptUsername() {
         final EditText etUsername = new EditText(GameActivity.this);
 
@@ -226,9 +248,6 @@ public class GameActivity extends AppCompatActivity {
        //etUsername.setInputType(InputType.TYPE_CLASS_TEXT);
 
         //Editable number = etNumber.getText();
-
-
-
 
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
@@ -240,12 +259,12 @@ public class GameActivity extends AppCompatActivity {
                 //afterTextChanged(number);
             }
         });
-
         alertDialog.show();
     }
 
+    // To take user to End Screen after completing the game
     private void gotoEndScreen() {
-        Intent i = new Intent(this, EndScreenActivty.class);
+        Intent i = new Intent(this, EndScreenActivity.class);
         i.putExtra("points", points);
         i.putExtra("user", user);
         i.putExtra("num", gameSize);
@@ -253,8 +272,8 @@ public class GameActivity extends AppCompatActivity {
         finish();
     }
 
+    // To dispose the current game, request a new number of cards from the player and create a new game
     private void restartGameActivity() {
-
         final EditText etNumber = new EditText(GameActivity.this);
 
         AlertDialog alertDialog = new AlertDialog.Builder(GameActivity.this).create();
@@ -269,15 +288,14 @@ public class GameActivity extends AppCompatActivity {
                 afterTextChanged(number);
             }
         });
-
         alertDialog.show();
-
     }
 
+    // To ensure the game is creating an even set of cards from 4 to 20
     private void afterTextChanged(Editable number) {
         gameSize = Integer.parseInt(number.toString());
         if (gameSize >= 4 && gameSize <=20){
-            if(gameSize%2 == 0){
+            if(gameSize%2 == 0) {
                 counter = 0;
                 clicks = 0;
                 firstClicked = -1;
@@ -293,18 +311,17 @@ public class GameActivity extends AppCompatActivity {
                     selectedCards[i] = 0;
                 }
                 goGameActivity();
-            }
-            else{
+            } else {
                 Toast.makeText(this, "OUT OF RANGE AND TRY AGAIN", Toast.LENGTH_SHORT).show();
                 restartGameActivity();
             }
-        }
-        else{
+        } else{
             Toast.makeText(this, "OUT OF RANGE AND TRY AGAIN", Toast.LENGTH_SHORT).show();
             restartGameActivity();
         }
     }
 
+    // To create the game
     private void goGameActivity() {
         Intent i = new Intent(this, GameActivity.class);
         i.putExtra("num", gameSize);
@@ -314,7 +331,6 @@ public class GameActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
-
         outState.putInt("points", points);
         outState.putInt("counter", counter);
         outState.putSerializable("buttons", buttons);

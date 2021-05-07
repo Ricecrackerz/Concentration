@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Concentration">
         <activity
-            android:name=".EndScreenActivty"
+            android:name=".EndScreenActivity"
             tools:ignore="Instantiatable" />
         <activity android:name=".HighScoreActivity" />
         <activity android:name=".GameActivity"
