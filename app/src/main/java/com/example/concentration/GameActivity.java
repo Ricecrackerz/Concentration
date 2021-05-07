@@ -36,6 +36,7 @@ public class GameActivity extends AppCompatActivity {
     public static int selectedCards[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     public static ArrayList<Integer> images = new ArrayList<>();
     public static boolean check = false;
+    public static String user;
     TextView tvScore;
     Button btnTryAgain, btnNewGame, btnEndGame;
 
@@ -147,7 +148,8 @@ public class GameActivity extends AppCompatActivity {
                                 points += 2;
                                 counter +=2;
                                 if(counter == gameSize){
-                                    gotoEndScreen();
+                                    //gotoEndScreen();
+                                    promptUsername();
                                 }
                                 tvScore.setText(String.valueOf(points));
                             }
@@ -183,6 +185,7 @@ public class GameActivity extends AppCompatActivity {
                     buttons[i].setImageResource(cardBack);
                 }
                 gotoEndScreen();
+                //promptUsername();
             }
         });
 
@@ -214,9 +217,38 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    private void promptUsername() {
+        final EditText etUsername = new EditText(GameActivity.this);
+
+        AlertDialog alertDialog = new AlertDialog.Builder(GameActivity.this).create();
+        alertDialog.setTitle("Please put in your username");
+        alertDialog.setView(etUsername);
+       //etUsername.setInputType(InputType.TYPE_CLASS_TEXT);
+
+        //Editable number = etNumber.getText();
+
+
+
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                user = etUsername.getText().toString();
+                System.out.println(user);
+                System.out.println(gameSize);
+                gotoEndScreen();
+
+                //afterTextChanged(number);
+            }
+        });
+
+        alertDialog.show();
+    }
+
     private void gotoEndScreen() {
         Intent i = new Intent(this, EndScreenActivty.class);
         i.putExtra("points", points);
+        i.putExtra("user", user);
+        i.putExtra("num", gameSize);
         startActivity(i);
         finish();
     }
@@ -226,7 +258,7 @@ public class GameActivity extends AppCompatActivity {
         final EditText etNumber = new EditText(GameActivity.this);
 
         AlertDialog alertDialog = new AlertDialog.Builder(GameActivity.this).create();
-        alertDialog.setTitle("Choose an even number between 2 and 20");
+        alertDialog.setTitle("Choose an even number between 4 and 20");
         alertDialog.setView(etNumber);
         etNumber.setInputType(InputType.TYPE_CLASS_NUMBER);
 
@@ -244,7 +276,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void afterTextChanged(Editable number) {
         gameSize = Integer.parseInt(number.toString());
-        if (gameSize >= 2 && gameSize <=20){
+        if (gameSize >= 4 && gameSize <=20){
             if(gameSize%2 == 0){
                 counter = 0;
                 clicks = 0;

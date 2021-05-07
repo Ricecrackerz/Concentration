@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         final EditText etNumber = new EditText(MainActivity.this);
 
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-        alertDialog.setTitle("Choose an even number between 2 and 20");
+        alertDialog.setTitle("Choose an even number between 4 and 20");
         alertDialog.setView(etNumber);
         etNumber.setInputType(InputType.TYPE_CLASS_NUMBER);
 
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void afterTextChanged(Editable s) {
         gameSize = Integer.parseInt(s.toString());
-        if (gameSize >= 2 && gameSize <=20){
+        if (gameSize >= 4 && gameSize <=20){
             if(gameSize%2 == 0){
                 goGameActivity();
             }
