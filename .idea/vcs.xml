@@ -2,8 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/Flixster" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/Parstagram" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/SimpleTweet" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Flixster" vcs="" />
+    <mapping directory="$PROJECT_DIR$/Parstagram" vcs="" />
+    <mapping directory="$PROJECT_DIR$/SimpleTweet" vcs="" />
   </component>
 </project>

@@ -81,7 +81,7 @@ public class EndScreenActivty extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*Writer writer = null;
+        Writer writer = null;
         try {
             OutputStream out = mContext.openFileOutput(mFilename, Context.MODE_PRIVATE);
             writer = new OutputStreamWriter(out);
@@ -90,9 +90,7 @@ public class EndScreenActivty extends AppCompatActivity {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
-
-
+        }
 
     }
 }
