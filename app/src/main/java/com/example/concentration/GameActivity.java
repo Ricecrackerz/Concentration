@@ -252,8 +252,6 @@ public class GameActivity extends AppCompatActivity {
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 user = etUsername.getText().toString();
-                System.out.println(user);
-                System.out.println(gameSize);
                 gotoEndScreen();
 
                 //afterTextChanged(number);

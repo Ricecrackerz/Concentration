@@ -4,18 +4,30 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.FileUtils;
+import android.util.Log;
 import android.widget.TextView;
+
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 
 /**
  *  EndScreenActivity.java
@@ -29,15 +41,16 @@ public class EndScreenActivity extends AppCompatActivity {
     public static int points, gameSize;
     public static String user;
     TextView tvPoints, tvUsername;
+    public static File file;
+    public int newScore = 0;
+    public int index;
 
-    private Context mContext;
-    private String mFilename;
+    //int userPoints[] ={'0', '0', '0'};
+    //String userNames[] = {"ABC", "ABC", "ABC"};
 
-    // Needed constructor to save scores into file
-    public EndScreenActivity(Context c, String f){
-        mContext = c;
-        mFilename = f;
-    }
+    ArrayList<Integer> userPoints = new ArrayList<>(3);
+    ArrayList<String> userNames = new ArrayList<>(3);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +62,7 @@ public class EndScreenActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
 
-        if (extras != null){
+        if (extras != null) {
             points = extras.getInt("points");
             user = extras.getString("user");
             gameSize = extras.getInt("num");
@@ -57,9 +70,50 @@ public class EndScreenActivity extends AppCompatActivity {
 
         tvPoints.setText(String.valueOf(points));
         tvUsername.setText(String.valueOf(user));
-        System.out.println(gameSize);
 
-        JSONObject highScore = new JSONObject();
+
+        userPoints.add(0);
+        userPoints.add(0);
+        userPoints.add(0);
+
+        userNames.add("ABC");
+        userNames.add("ABC");
+        userNames.add("ABC");
+
+       switch(gameSize){
+            case 4:
+                file = new File("scores4.txt");
+                break;
+           case 6:
+               file = new File("scores6.txt");
+               break;
+           case 8:
+               file = new File("scores8.txt");
+               break;
+           case 10:
+               file = new File("scores10.txt");
+               break;
+           case 12:
+               file = new File("scores12.txt");
+               break;
+           case 14:
+               file = new File("scores14.txt");
+               break;
+           case 16:
+               file = new File("scores16.txt");
+               break;
+           case 18:
+               file = new File("scores18.txt");
+               break;
+           case 20:
+               file = new File("scores20.txt");
+               break;
+       }
+
+
+
+        /*JSONObject highScore = new JSONObject();
+
         try {
             highScore.put("id", gameSize);
             highScore.put("user", user);
@@ -68,37 +122,99 @@ public class EndScreenActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        JSONArray jsonArray = new JSONArray();
+        JSONArray scoreArray = new JSONArray();
 
-        jsonArray.put(highScore);
+        scoreArray.put(highScore);
+
         JSONObject score = new JSONObject();
         try {
-            score.put("score", jsonArray);
+            score.put("score", scoreArray);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        //String json = score.toString();
+        String json = score.toString();*/
 
-        //System.out.println(json);
+        String separate = ", ";
+        String space = "\n";
 
-        try(FileWriter file = new FileWriter("scores.json")){
-            file.write(score.toString());
-            file.flush();
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        for(int i = 0; i < 3; i++){
+            if (points > userPoints.get(i)){
+                newScore = points;
+                i = index;
+            }
         }
-        Writer writer = null;
+
+        userNames.add(index, user);
+        userPoints.add(index, newScore);
+        System.out.println(points);
+
+        FileOutputStream fos = null;
         try {
-            OutputStream out = mContext.openFileOutput(mFilename, Context.MODE_PRIVATE);
-            writer = new OutputStreamWriter(out);
-            writer.write(jsonArray.toString());
+
+            fos = openFileOutput(String.valueOf(file), MODE_PRIVATE);
+            fos.write(userNames.get(0).getBytes());
+            fos.write(separate.getBytes());
+            fos.write(String.valueOf(userPoints.get(0)).getBytes());
+            fos.write(space.getBytes());
+            fos.write(userNames.get(1).getBytes());
+            fos.write(separate.getBytes());
+            fos.write(String.valueOf(userPoints.get(1)).getBytes());
+            fos.write(space.getBytes());
+            fos.write(userNames.get(2).getBytes());
+            fos.write(separate.getBytes());
+            fos.write(String.valueOf(userPoints.get(2)).getBytes());
+            fos.write(space.getBytes());
+            /*fos.write(defaultScores.getBytes());
+            fos.write(user.getBytes());
+            fos.write(separate.getBytes());
+            fos.write(String.valueOf(points).getBytes());
+            fos.write(space.getBytes());*/
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            if (fos !=null){
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
+        /*FileInputStream fis = null;
+        try {
+            fis = this.openFileInput("scores.json");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        InputStreamReader isr = new InputStreamReader(fis);
+        BufferedReader bufferedReader = new BufferedReader(isr);
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while (true) {
+            try {
+                if (((line = bufferedReader.readLine()) != null))
+                    sb.append(line);
+                    //break;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }*/
+
+        /*try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(this.openFileOutput("scores.json", Context.MODE_PRIVATE));
+            outputStreamWriter.write(json);
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }*/
+
     }
+
 }
