@@ -8,7 +8,6 @@ import android.os.FileUtils;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -79,31 +78,31 @@ public class EndScreenActivity extends AppCompatActivity {
 
        switch(gameSize){
            case 4:
-               file = new File(getFilesDir(),"scores4.txt");
+               file = new File("scores4.txt");
                break;
            case 6:
-               file = new File(getFilesDir(),"scores6.txt");
+               file = new File("scores6.txt");
                break;
            case 8:
-               file = new File(getFilesDir(),"scores8.txt");
+               file = new File("scores8.txt");
                break;
            case 10:
-               file = new File(getFilesDir(),"scores10.txt");
+               file = new File("scores10.txt");
                break;
            case 12:
-               file = new File(getFilesDir(),"scores12.txt");
+               file = new File("scores12.txt");
                break;
            case 14:
-               file = new File(getFilesDir(),"scores14.txt");
+               file = new File("scores14.txt");
                break;
            case 16:
-               file = new File(getFilesDir(),"scores16.txt");
+               file = new File("scores16.txt");
                break;
            case 18:
-               file = new File(getFilesDir(),"scores18.txt");
+               file = new File("scores18.txt");
                break;
            case 20:
-               file = new File(getFilesDir(),"scores20.txt");
+               file = new File("scores20.txt");
                break;
            default:
                break;
@@ -152,18 +151,18 @@ public class EndScreenActivity extends AppCompatActivity {
 
             //fos = new FileOutputStream(file);
             fos = openFileOutput(String.valueOf(file), MODE_APPEND);
-            /*fos.write(userNames.get(0).getBytes());
-            fos.write(separate.getBytes());
-            fos.write(String.valueOf(userPoints.get(0)).getBytes());
-            fos.write(space.getBytes());
-            fos.write(userNames.get(1).getBytes());
-            fos.write(separate.getBytes());
-            fos.write(String.valueOf(userPoints.get(1)).getBytes());
-            fos.write(space.getBytes());
-            fos.write(userNames.get(2).getBytes());
-            fos.write(separate.getBytes());
-            fos.write(String.valueOf(userPoints.get(2)).getBytes());
-            fos.write(space.getBytes());*/
+//            fos.write(userNames.get(0).getBytes());
+//            fos.write(separate.getBytes());
+//            fos.write(String.valueOf(userPoints.get(0)).getBytes());
+//            fos.write(space.getBytes());
+//            fos.write(userNames.get(1).getBytes());
+//            fos.write(separate.getBytes());
+//            fos.write(String.valueOf(userPoints.get(1)).getBytes());
+//            fos.write(space.getBytes());
+//            fos.write(userNames.get(2).getBytes());
+//            fos.write(separate.getBytes());
+//            fos.write(String.valueOf(userPoints.get(2)).getBytes());
+//            fos.write(space.getBytes());
             //fos.write(defaultScores.getBytes());
             fos.write(user.getBytes());
             fos.write(separate.getBytes());
