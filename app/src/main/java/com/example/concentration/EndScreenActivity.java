@@ -28,6 +28,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *  EndScreenActivity.java
@@ -41,15 +42,16 @@ public class EndScreenActivity extends AppCompatActivity {
     public static int points, gameSize;
     public static String user;
     TextView tvPoints, tvUsername;
-    public static File file;
     public int newScore = 0;
     public int index;
+    private File file;
+    boolean save = true;
 
     //int userPoints[] ={'0', '0', '0'};
     //String userNames[] = {"ABC", "ABC", "ABC"};
 
-    ArrayList<Integer> userPoints = new ArrayList<>(3);
-    ArrayList<String> userNames = new ArrayList<>(3);
+    ArrayList<Integer> userPoints = new ArrayList<>();
+    ArrayList<String> userNames = new ArrayList<>();
 
 
     @Override
@@ -72,88 +74,85 @@ public class EndScreenActivity extends AppCompatActivity {
         tvUsername.setText(String.valueOf(user));
 
 
-        userPoints.add(0);
-        userPoints.add(0);
-        userPoints.add(0);
-
-        userNames.add("ABC");
-        userNames.add("ABC");
-        userNames.add("ABC");
+        userPoints.add(points);
+        userNames.add(user);
 
        switch(gameSize){
-            case 4:
-                file = new File("scores4.txt");
-                break;
+           case 4:
+               file = new File(getFilesDir(),"scores4.txt");
+               break;
            case 6:
-               file = new File("scores6.txt");
+               file = new File(getFilesDir(),"scores6.txt");
                break;
            case 8:
-               file = new File("scores8.txt");
+               file = new File(getFilesDir(),"scores8.txt");
                break;
            case 10:
-               file = new File("scores10.txt");
+               file = new File(getFilesDir(),"scores10.txt");
                break;
            case 12:
-               file = new File("scores12.txt");
+               file = new File(getFilesDir(),"scores12.txt");
                break;
            case 14:
-               file = new File("scores14.txt");
+               file = new File(getFilesDir(),"scores14.txt");
                break;
            case 16:
-               file = new File("scores16.txt");
+               file = new File(getFilesDir(),"scores16.txt");
                break;
            case 18:
-               file = new File("scores18.txt");
+               file = new File(getFilesDir(),"scores18.txt");
                break;
            case 20:
-               file = new File("scores20.txt");
+               file = new File(getFilesDir(),"scores20.txt");
+               break;
+           default:
                break;
        }
 
+        /*try {
+            Scanner scan = new Scanner(file);
+            for(int i = 0; i < userPoints.size()-1; i++){
+                userPoints.add(scan.nextInt());
+                System.out.println(userPoints.get(i));
+            }
+            scan.close();
 
-
-        /*JSONObject highScore = new JSONObject();
-
-        try {
-            highScore.put("id", gameSize);
-            highScore.put("user", user);
-            highScore.put("points", points);
-        } catch (JSONException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
+        }*/
 
-        JSONArray scoreArray = new JSONArray();
 
-        scoreArray.put(highScore);
 
-        JSONObject score = new JSONObject();
-        try {
-            score.put("score", scoreArray);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        String json = score.toString();*/
 
         String separate = ", ";
         String space = "\n";
 
-        for(int i = 0; i < 3; i++){
-            if (points > userPoints.get(i)){
+        /*for(int i = 0; i < userPoints.size(); i++){
+            if(points > userPoints.get(i)){
+                index = i;
                 newScore = points;
-                i = index;
+                break;
             }
         }
 
+
+
         userNames.add(index, user);
         userPoints.add(index, newScore);
-        System.out.println(points);
+        System.out.println(points);*/
 
         FileOutputStream fos = null;
+       /* try {
+            fos = new FileOutputStream(file, true);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }*/
+
         try {
 
-            fos = openFileOutput(String.valueOf(file), MODE_PRIVATE);
-            fos.write(userNames.get(0).getBytes());
+            //fos = new FileOutputStream(file);
+            fos = openFileOutput(String.valueOf(file), MODE_APPEND);
+            /*fos.write(userNames.get(0).getBytes());
             fos.write(separate.getBytes());
             fos.write(String.valueOf(userPoints.get(0)).getBytes());
             fos.write(space.getBytes());
@@ -164,12 +163,13 @@ public class EndScreenActivity extends AppCompatActivity {
             fos.write(userNames.get(2).getBytes());
             fos.write(separate.getBytes());
             fos.write(String.valueOf(userPoints.get(2)).getBytes());
-            fos.write(space.getBytes());
-            /*fos.write(defaultScores.getBytes());
+            fos.write(space.getBytes());*/
+            //fos.write(defaultScores.getBytes());
             fos.write(user.getBytes());
             fos.write(separate.getBytes());
             fos.write(String.valueOf(points).getBytes());
-            fos.write(space.getBytes());*/
+            fos.write(space.getBytes());
+            //fos.write(separate.getBytes());
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
