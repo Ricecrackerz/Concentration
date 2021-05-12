@@ -3,9 +3,12 @@ package com.example.concentration;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.FileUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -41,6 +44,7 @@ public class EndScreenActivity extends AppCompatActivity {
     public static int points, gameSize;
     public static String user;
     TextView tvPoints, tvUsername;
+    Button btnHomeHSE;
     public int newScore = 0;
     public int index;
     private File file;
@@ -60,6 +64,14 @@ public class EndScreenActivity extends AppCompatActivity {
 
         tvPoints = findViewById(R.id.tvPoints);
         tvUsername = findViewById(R.id.tvUsername);
+        btnHomeHSE = findViewById(R.id.btnHomeHSE);
+
+        btnHomeHSE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goHomeActivity();
+            }
+        });
 
         Bundle extras = getIntent().getExtras();
 
@@ -214,6 +226,12 @@ public class EndScreenActivity extends AppCompatActivity {
             Log.e("Exception", "File write failed: " + e.toString());
         }*/
 
+    }
+
+    private void goHomeActivity() {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+        finish();
     }
 
 }

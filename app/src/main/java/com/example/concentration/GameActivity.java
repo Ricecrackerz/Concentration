@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -46,11 +48,13 @@ public class GameActivity extends AppCompatActivity {
     public static ArrayList<Integer> images = new ArrayList<>();
     public static boolean check = false;
     public static String user;
+    public static boolean reset = false;
     TextView tvScore;
-    Button btnTryAgain, btnNewGame, btnEndGame;
+    Button btnTryAgain, btnNewGame, btnEndGame, btnHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        resetGame();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
@@ -64,6 +68,7 @@ public class GameActivity extends AppCompatActivity {
         btnTryAgain = (Button) findViewById(R.id.btnTryAgain);
         btnNewGame = (Button) findViewById(R.id.btnNewGame);
         btnEndGame = (Button) findViewById(R.id.btnEndGame);
+        btnHome = (Button) findViewById(R.id.btnHome);
         tvScore = (TextView) findViewById(R.id.tvScore);
 
         // To display the cardBack and not reveal the animal
@@ -98,10 +103,9 @@ public class GameActivity extends AppCompatActivity {
         }
 
         // Creating an ID list of buttons to allocate correct buttons with proper values
-        int [] idButton = {R.id.btn1, R.id.btn2,R.id.btn3,R.id.btn4,R.id.btn5,R.id.btn6,R.id.btn7,R.id.btn8, R.id.btn9,
-                R.id.btn10,R.id.btn11,R.id.btn12,R.id.btn13,R.id.btn14,R.id.btn15,R.id.btn16,R.id.btn17,R.id.btn18,
-                R.id.btn19,R.id.btn20};
-
+        int [] idButton = {R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9,
+                R.id.btn10, R.id.btn11, R.id.btn12, R.id.btn13, R.id.btn14, R.id.btn15, R.id.btn16, R.id.btn17, R.id.btn18,
+                R.id.btn19, R.id.btn20};
         // To ensure the amount of cards are the same as the number the user requested
         for(int i = 0; i < idButton.length; i++){
             if(i > gameSize - 1){
@@ -194,6 +198,14 @@ public class GameActivity extends AppCompatActivity {
                 });
             }
         }
+
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goHomeActivity();
+                resetGame();
+            }
+        });
 
         // Button clicked the reveal all answers
         btnEndGame.setOnClickListener(new View.OnClickListener() {
@@ -327,6 +339,27 @@ public class GameActivity extends AppCompatActivity {
         finish();
     }
 
+    private void goHomeActivity() {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+        finish();
+    }
+
+    public void resetGame() {
+        clicks = 0;
+        counter = 0;
+        firstClicked = -1;
+        lastClicked = -1;
+        firstImage = 0;
+        secondImage = 0;
+        points = 0;
+        check = false;
+        Arrays.fill(buttons,null);
+        Arrays.fill(flags,0);
+        Arrays.fill(selectedCards,0);
+        gameSize = 0;
+        reset = true;
+    }
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putInt("points", points);

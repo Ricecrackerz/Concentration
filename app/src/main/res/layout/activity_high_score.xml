@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#787878"
     tools:context=".HighScoreActivity">
 
     <TextView
@@ -15,5 +16,51 @@
         android:layout_centerVertical="true"
         android:layout_marginTop="251dp"
         android:layout_marginEnd="145dp"
-        android:text="TextView" />
+        android:fontFamily="@font/alata"
+        android:text="TextView"
+        android:textColor="#FFFF"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btnHomeHS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="#E6B0FF"
+        android:fontFamily="@font/alata"
+        android:text="GO HOME"
+        android:textColor="#FFFF"
+        android:textSize="20sp" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tbHighscores"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E6B0FF"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <TextView
+        android:id="@+id/tvHighscores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="103dp"
+        android:fontFamily="@font/baloo"
+        android:text="HIGHSCORES"
+        android:textColor="#ffff"
+        android:textSize="30sp" />
+
+    <ImageView
+        android:id="@+id/ivHighscoresVent"
+        android:layout_width="100dp"
+        android:layout_height="56dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        app:srcCompat="@drawable/vent" />
 </RelativeLayout>

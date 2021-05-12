@@ -1,33 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#FB508A"
+    android:layout_height="match_parent"
+    android:background="#787878"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/btnGame"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="500dp"
-        android:layout_weight="1"
-        android:text="Game" />
-
-    <Button
-        android:id="@+id/btnHs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="High Scores" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="284dp"
+        android:backgroundTint="#E6B0FF"
+        android:fontFamily="@font/alata"
+        android:text="Game"
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/btnMusic"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="126dp"
+        android:backgroundTint="#E6B0FF"
+        android:fontFamily="@font/alata"
+        android:text="Music"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/btnHs"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="205dp"
+        android:backgroundTint="#E6B0FF"
+        android:fontFamily="@font/alata"
+        android:text="High Scores"
+        android:textSize="25sp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="7dp"
+        app:srcCompat="@drawable/tonysmall" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Music" />
+        android:background="#E6B0FF"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tvToolBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="75dp"
+        android:fontFamily="@font/baloo"
+        android:text="CONCENTRATION"
+        android:textColor="#FFFF"
+        android:textSize="30sp" />
+
+    <ImageView
+        android:id="@+id/ivVent"
+        android:layout_width="69dp"
+        android:layout_height="56dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="5dp"
+        app:srcCompat="@drawable/vent" />
+
+</RelativeLayout>

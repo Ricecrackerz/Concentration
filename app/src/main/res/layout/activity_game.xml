@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#787878"
     tools:context=".GameActivity">
 
     <TableLayout
@@ -105,7 +105,6 @@
                 android:backgroundTint="#BE8EFF" />
 
 
-
         </TableRow>
 
 
@@ -173,37 +172,18 @@
         </TableRow>
     </TableLayout>
 
-    <Button
-        android:id="@+id/btnTryAgain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="214dp"
-        android:layout_marginBottom="86dp"
-        android:scaleType="fitXY"
-        android:text="TRY AGAIN" />
-
-    <Button
-        android:id="@+id/btnEndGame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="66dp"
-        android:layout_marginBottom="37dp"
-        android:text="END GAME" />
-
     <TextView
         android:id="@+id/tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="47dp"
-        android:layout_marginBottom="101dp"
+        android:layout_marginStart="49dp"
+        android:layout_marginBottom="176dp"
+        android:fontFamily="@font/baloo"
         android:text="SCORE:"
-        android:textSize="18sp" />
+        android:textColor="#FFFF"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tvScore"
@@ -211,22 +191,61 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="116dp"
-        android:layout_marginBottom="99dp"
+        android:layout_marginStart="125dp"
+        android:layout_marginBottom="176dp"
+        android:fontFamily="@font/baloo"
         android:text="0"
-        android:textSize="18sp" />
+        android:textColor="#FFFF"
+        android:textSize="20sp" />
 
     <Button
-        android:id="@+id/btnNewGame"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnEndGame"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="233dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="44dp"
+        android:backgroundTint="#E6B0FF"
+        android:scaleType="fitXY"
+        android:text="END GAME" />
+
+    <Button
+        android:id="@+id/btnTryAgain"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginBottom="39dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="260dp"
+        android:layout_marginBottom="102dp"
+        android:backgroundTint="#E6B0FF"
+        android:scaleType="fitXY"
+        android:text="TRY AGAIN" />
+
+    <Button
+        android:id="@+id/btnNewGame"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="258dp"
+        android:layout_marginBottom="159dp"
+        android:backgroundTint="#E6B0FF"
         android:text="NEW GAME" />
 
-
+    <Button
+        android:id="@+id/btnHome"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="43dp"
+        android:backgroundTint="#E6B0FF"
+        android:text="GO HOME" />
 
 
 </RelativeLayout>
