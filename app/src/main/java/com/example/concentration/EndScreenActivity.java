@@ -120,6 +120,36 @@ public class EndScreenActivity extends AppCompatActivity {
                break;
        }
 
+       /* case 4:
+        file = new File(getFilesDir(),"scores4.txt");
+        break;
+        case 6:
+        file = new File(getFilesDir(),"scores6.txt");
+        break;
+        case 8:
+        file = new File(getFilesDir(),"scores8.txt");
+        break;
+        case 10:
+        file = new File(getFilesDir(),"scores10.txt");
+        break;
+        case 12:
+        file = new File(getFilesDir(),"scores12.txt");
+        break;
+        case 14:
+        file = new File(getFilesDir(),"scores14.txt");
+        break;
+        case 16:
+        file = new File(getFilesDir(),"scores16.txt");
+        break;
+        case 18:
+        file = new File(getFilesDir(),"scores18.txt");
+        break;
+        case 20:
+        file = new File(getFilesDir(),"scores20.txt");
+        break;
+        default:
+        break;*/
+
         /*try {
             Scanner scan = new Scanner(file);
             for(int i = 0; i < userPoints.size()-1; i++){
@@ -131,9 +161,6 @@ public class EndScreenActivity extends AppCompatActivity {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }*/
-
-
-
 
         String separate = ", ";
         String space = "\n";
@@ -195,36 +222,6 @@ public class EndScreenActivity extends AppCompatActivity {
                 }
             }
         }
-
-        /*FileInputStream fis = null;
-        try {
-            fis = this.openFileInput("scores.json");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        InputStreamReader isr = new InputStreamReader(fis);
-        BufferedReader bufferedReader = new BufferedReader(isr);
-        StringBuilder sb = new StringBuilder();
-        String line;
-        while (true) {
-            try {
-                if (((line = bufferedReader.readLine()) != null))
-                    sb.append(line);
-                    //break;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }*/
-
-        /*try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(this.openFileOutput("scores.json", Context.MODE_PRIVATE));
-            outputStreamWriter.write(json);
-            outputStreamWriter.close();
-        }
-        catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }*/
 
     }
 

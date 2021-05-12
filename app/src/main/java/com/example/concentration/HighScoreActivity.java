@@ -18,6 +18,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -165,8 +166,12 @@ public class HighScoreActivity extends AppCompatActivity {
             System.out.println(highScores[i]);
         }*/
 
-
+        FileOutputStream fos = null;
         try {
+            if(file.length() == 0 || !file.exists()){
+                fos = new FileOutputStream(file);
+                fos.write("ABC...5\nABC...4\nABC...3\nABC...2\nABC...1".getBytes());
+            }
             fis = this.openFileInput(String.valueOf(file));
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
