@@ -49,6 +49,9 @@ public class GameActivity extends AppCompatActivity {
     public static boolean check = false;
     public static String user;
     public static boolean reset = false;
+    public static int[] idButton = {R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9,
+            R.id.btn10, R.id.btn11, R.id.btn12, R.id.btn13, R.id.btn14, R.id.btn15, R.id.btn16, R.id.btn17, R.id.btn18,
+            R.id.btn19, R.id.btn20};
     TextView tvScore;
     Button btnTryAgain, btnNewGame, btnEndGame, btnHome;
 
@@ -103,9 +106,9 @@ public class GameActivity extends AppCompatActivity {
         }
 
         // Creating an ID list of buttons to allocate correct buttons with proper values
-        int [] idButton = {R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9,
+        /*idButton[] = {R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9,
                 R.id.btn10, R.id.btn11, R.id.btn12, R.id.btn13, R.id.btn14, R.id.btn15, R.id.btn16, R.id.btn17, R.id.btn18,
-                R.id.btn19, R.id.btn20};
+                R.id.btn19, R.id.btn20};*/
         // To ensure the amount of cards are the same as the number the user requested
         for(int i = 0; i < idButton.length; i++){
             if(i > gameSize - 1){
@@ -314,6 +317,14 @@ public class GameActivity extends AppCompatActivity {
                 secondImage = 0;
                 points = 0;
                 counter = 0;
+                int idButton1[] = {R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9,
+                        R.id.btn10, R.id.btn11, R.id.btn12, R.id.btn13, R.id.btn14, R.id.btn15, R.id.btn16, R.id.btn17, R.id.btn18,
+                        R.id.btn19, R.id.btn20};
+
+                for(int i = 0; i < idButton1.length; i++){
+                    idButton[i] = idButton1[i];
+                }
+
                 check = false;
                 Collections.sort(images);
                 for(int i = 0; i < buttons.length; i++){

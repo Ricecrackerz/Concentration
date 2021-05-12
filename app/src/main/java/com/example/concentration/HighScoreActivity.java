@@ -165,23 +165,21 @@ public class HighScoreActivity extends AppCompatActivity {
             highScores[i] = kb.nextLine();
             System.out.println(highScores[i]);
         }*/
-
-        FileOutputStream fos = null;
         try {
-            if(file.length() == 0 || !file.exists()){
+            /*if(file.length() == 0 || !file.exists()){
                 fos = new FileOutputStream(file);
                 fos.write("ABC...5\nABC...4\nABC...3\nABC...2\nABC...1".getBytes());
-            }
+            }*/
             fis = this.openFileInput(String.valueOf(file));
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             StringBuilder sb = new StringBuilder();
             String line;
-            while ((line = br.readLine()) != null){
-                sb.append(line).append("\n");
-            }
-            textView.setText(sb.toString());
-            //System.out.println(sb.toString());
+        while ((line = br.readLine()) != null){
+            sb.append(line).append("\n");
+        }
+        textView.setText(sb.toString());
+        //System.out.println(sb.toString());
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
