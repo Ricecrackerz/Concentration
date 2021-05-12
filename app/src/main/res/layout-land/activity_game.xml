@@ -7,6 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".GameActivity">
 
+    <Button
+        android:id="@+id/btnHome"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="17dp"
+        android:layout_marginBottom="7dp"
+        android:backgroundTint="#E6B0FF"
+        android:fontFamily="@font/alata"
+        android:text="GO HOME" />
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -174,35 +186,28 @@
 
     <Button
         android:id="@+id/btnNewGame"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="379dp"
         android:layout_marginBottom="6dp"
+        android:backgroundTint="#E6B0FF"
+        android:fontFamily="@font/alata"
         android:text="NEW GAME" />
 
     <Button
         android:id="@+id/btnTryAgain"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="199dp"
         android:layout_marginBottom="6dp"
+        android:backgroundTint="#E6B0FF"
+        android:fontFamily="@font/alata"
         android:scaleType="fitXY"
         android:text="TRY AGAIN" />
-
-    <TextView
-        android:id="@+id/tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="22dp"
-        android:text="SCORE:"
-        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tvScore"
@@ -210,19 +215,36 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="101dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="129dp"
+        android:layout_marginBottom="76dp"
+        android:fontFamily="@font/alata"
         android:text="0"
-        android:textSize="18sp" />
+        android:textColor="#FFFF"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="17dp"
+        android:layout_marginBottom="76dp"
+        android:fontFamily="@font/alata"
+        android:text="SCORE:"
+        android:textColor="#FFFF"
+        android:textSize="30sp" />
 
     <Button
         android:id="@+id/btnEndGame"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="64dp"
         android:layout_marginBottom="6dp"
+        android:backgroundTint="#E6B0FF"
+        android:fontFamily="@font/alata"
         android:text="END GAME" />
 
 

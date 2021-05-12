@@ -210,6 +210,7 @@
         android:layout_marginBottom="44dp"
         android:backgroundTint="#E6B0FF"
         android:scaleType="fitXY"
+        android:fontFamily="@font/alata"
         android:text="END GAME" />
 
     <Button
@@ -223,6 +224,7 @@
         android:layout_marginBottom="102dp"
         android:backgroundTint="#E6B0FF"
         android:scaleType="fitXY"
+        android:fontFamily="@font/alata"
         android:text="TRY AGAIN" />
 
     <Button
@@ -234,6 +236,7 @@
         android:layout_marginStart="258dp"
         android:layout_marginBottom="159dp"
         android:backgroundTint="#E6B0FF"
+        android:fontFamily="@font/alata"
         android:text="NEW GAME" />
 
     <Button
@@ -245,6 +248,7 @@
         android:layout_marginStart="36dp"
         android:layout_marginBottom="43dp"
         android:backgroundTint="#E6B0FF"
+        android:fontFamily="@font/alata"
         android:text="GO HOME" />
 
 
