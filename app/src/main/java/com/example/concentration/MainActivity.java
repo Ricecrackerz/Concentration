@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AudioPlayer mediaPlayer = new AudioPlayer();
     private boolean isPlaying = false;
+    public static boolean reset1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
         btnGame = findViewById(R.id.btnGame);
         btnMusic = findViewById(R.id.btnMusic);
         btnHs = findViewById(R.id.btnHs);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null){
+            reset1 = extras.getBoolean("reset1");
+
+        }
 
         btnGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,11 +98,11 @@ public class MainActivity extends AppCompatActivity {
                 goGameActivity();
             }
             else {
-                Toast.makeText(this, "OUT OF RANGE AND TRY AGAIN", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "INVALID RESPONSE AND TRY AGAIN", Toast.LENGTH_SHORT).show();
             }
         }
         else{
-            Toast.makeText(this, "OUT OF RANGE AND TRY AGAIN", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "INVALID RESPONSE AND TRY AGAIN", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -103,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
     private void goGameActivity(){
         Intent i = new Intent(this, GameActivity.class);
         i.putExtra("num", gameSize);
+        i.putExtra("reset1", reset1);
         startActivity(i);
         finish();
     }

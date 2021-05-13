@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.FileUtils;
 import android.util.Log;
@@ -30,7 +31,10 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 /**
  *  EndScreenActivity.java
@@ -49,6 +53,7 @@ public class EndScreenActivity extends AppCompatActivity {
     public int index;
     private File file;
     boolean save = true;
+    boolean reset1 = true;
 
     //int userPoints[] ={'0', '0', '0'};
     //String userNames[] = {"ABC", "ABC", "ABC"};
@@ -150,45 +155,37 @@ public class EndScreenActivity extends AppCompatActivity {
         default:
         break;*/
 
-        /*try {
-            Scanner scan = new Scanner(file);
-            for(int i = 0; i < userPoints.size()-1; i++){
-                userPoints.add(scan.nextInt());
-                System.out.println(userPoints.get(i));
-            }
-            scan.close();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }*/
-
         String separate = ", ";
         String space = "\n";
 
-        /*for(int i = 0; i < userPoints.size(); i++){
+        /*SharedPreferences settings = getSharedPreferences("GAME", Context.MODE_PRIVATE);
+        int highScore = settings.getInt("HIGH_SCORE", 0);
+        if (points > highScore){
+
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putInt("HIGH_SCORE", points);
+            editor.putString("USER", user);
+            editor.commit();
+
+            System.out.println(points);
+            System.out.println(user);
+        }
+
+        for(int i = 0; i < userPoints.size(); i++){
             if(points > userPoints.get(i)){
                 index = i;
                 newScore = points;
                 break;
             }
         }
-
-
-
         userNames.add(index, user);
         userPoints.add(index, newScore);
         System.out.println(points);*/
 
         FileOutputStream fos = null;
-       /* try {
-            fos = new FileOutputStream(file, true);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }*/
 
         try {
 
-            //fos = new FileOutputStream(file);
             fos = openFileOutput(String.valueOf(file), MODE_APPEND);
 //            fos.write(userNames.get(0).getBytes());
 //            fos.write(separate.getBytes());
@@ -227,6 +224,7 @@ public class EndScreenActivity extends AppCompatActivity {
 
     private void goHomeActivity() {
         Intent i = new Intent(this, MainActivity.class);
+        i.putExtra("reset1", reset1);
         startActivity(i);
         finish();
     }

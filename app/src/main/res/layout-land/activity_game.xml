@@ -7,17 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".GameActivity">
 
-    <Button
-        android:id="@+id/btnHome"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="17dp"
-        android:layout_marginBottom="7dp"
-        android:backgroundTint="#E6B0FF"
-        android:fontFamily="@font/alata"
-        android:text="GO HOME" />
+
 
     <TableLayout
         android:layout_width="match_parent"
@@ -246,6 +236,18 @@
         android:backgroundTint="#E6B0FF"
         android:fontFamily="@font/alata"
         android:text="END GAME" />
+
+    <Button
+        android:id="@+id/btnHome"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="17dp"
+        android:layout_marginBottom="7dp"
+        android:backgroundTint="#E6B0FF"
+        android:fontFamily="@font/alata"
+        android:text="GO HOME" />
 
 
 </RelativeLayout>

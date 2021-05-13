@@ -3,8 +3,10 @@ package com.example.concentration;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
@@ -22,7 +24,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 /**
  *  HighScoreActivity.java
@@ -34,9 +38,6 @@ public class HighScoreActivity extends AppCompatActivity {
     public static int gameSize;
     TextView textView;
     Button btnHomeHS;
-
-    ArrayList<Integer> userPoints = new ArrayList<>();
-    ArrayList<Byte> userNames = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,48 +130,19 @@ public class HighScoreActivity extends AppCompatActivity {
                 break;
         }
 
-        /*try {
-            Scanner scanner = new Scanner(file);
-            Scanner scanner1 = new Scanner(file);
-            for(int i = 0; i  < 4; i++){
-                userNames.add(scanner.nextByte());
-                System.out.println(userNames.get(i));
-            }
-            scanner.close();
-            for(int i = 0; i  < file.length(); i++){
-                userPoints.add(scanner.nextInt());
-                System.out.println(userPoints.get(i));
-            }
-            scanner1.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }*/
+
+
 
         FileInputStream fis = null;
 
-        /*try {
-            fis = new FileInputStream(file);
-            byte[] bytes = new byte[(int) file.length()];
-            fis.read(bytes);
-            score = new String(bytes);
-            kb = new Scanner(score);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        for(int i = 0; i < 3; i++ ) {
-            highScores[i] = kb.nextLine();
-            System.out.println(highScores[i]);
-        }*/
         try {
             /*if(file.length() == 0 || !file.exists()){
                 fos = new FileOutputStream(file);
                 fos.write("ABC...5\nABC...4\nABC...3\nABC...2\nABC...1".getBytes());
             }*/
+
             fis = this.openFileInput(String.valueOf(file));
+
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             StringBuilder sb = new StringBuilder();
@@ -178,8 +150,8 @@ public class HighScoreActivity extends AppCompatActivity {
         while ((line = br.readLine()) != null){
             sb.append(line).append("\n");
         }
+
         textView.setText(sb.toString());
-        //System.out.println(sb.toString());
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

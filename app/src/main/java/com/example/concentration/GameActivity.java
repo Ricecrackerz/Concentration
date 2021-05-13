@@ -20,9 +20,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 /**
  *  GameActitivity.java
@@ -35,7 +37,7 @@ import java.util.Collections;
  *                      If the player completes the game, prompt a dialogue box to request player's name along with the final score. The next screen should be
  *                      EndScreenActivity.java
  */
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity{
 
     public static int clicks = 0, counter = 0;
     public static int firstClicked = -1, lastClicked = -1;
@@ -45,19 +47,17 @@ public class GameActivity extends AppCompatActivity {
     public static ImageButton buttons[] = new ImageButton[20];
     public static int flags[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     public static int selectedCards[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    public static ArrayList<Integer> images = new ArrayList<>();
+    public static ArrayList<Integer> images = new ArrayList<>(20);
     public static boolean check = false;
     public static String user;
     public static boolean reset = false;
-    public static int[] idButton = {R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9,
-            R.id.btn10, R.id.btn11, R.id.btn12, R.id.btn13, R.id.btn14, R.id.btn15, R.id.btn16, R.id.btn17, R.id.btn18,
-            R.id.btn19, R.id.btn20};
+    public static boolean reset1;
     TextView tvScore;
     Button btnTryAgain, btnNewGame, btnEndGame, btnHome;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        resetGame();
+    protected void onCreate(Bundle savedInstanceState){
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
@@ -65,6 +65,29 @@ public class GameActivity extends AppCompatActivity {
 
         if (extras != null){
             gameSize = extras.getInt("num");
+            reset = extras.getBoolean("reset");
+            reset1 = extras.getBoolean("reset1");
+        }
+
+        if(reset1){
+            clicks = 0;
+            counter = 0;
+            firstClicked = -1;
+            lastClicked = -1;
+            firstImage = 0;
+            secondImage = 0;
+            points = 0;
+            check = false;
+            images.clear();
+            Arrays.fill(buttons,null);
+            Arrays.fill(flags,0);
+            Arrays.fill(selectedCards,0);
+            reset1 = false;
+
+        }
+        if(reset){
+            resetGame();
+            reset = false;
         }
 
         // To identify the buttons and score to the corresponding widgets on the xml file
@@ -73,6 +96,7 @@ public class GameActivity extends AppCompatActivity {
         btnEndGame = (Button) findViewById(R.id.btnEndGame);
         btnHome = (Button) findViewById(R.id.btnHome);
         tvScore = (TextView) findViewById(R.id.tvScore);
+
 
         // To display the cardBack and not reveal the animal
         int cardBack = R.drawable.cardback;
@@ -105,10 +129,32 @@ public class GameActivity extends AppCompatActivity {
             check = true;
         }
 
+        if(savedInstanceState != null){
+            points = savedInstanceState.getInt("points");
+            counter = savedInstanceState.getInt("counter");
+            tvScore.setText(String.valueOf(points));
+            buttons = (ImageButton[]) savedInstanceState.getSerializable("buttons");
+            images = savedInstanceState.getIntegerArrayList("images");
+            flags = savedInstanceState.getIntArray("flags");
+            check = savedInstanceState.getBoolean("check");
+
+            for(int i = 0; i < buttons.length; i++){
+                if (flags[i] == 1){
+                    buttons[i].setImageResource(images.get(i));
+                    buttons[i].setClickable(false);
+                }
+                if (selectedCards[i] == 1){
+                    buttons[i].setImageResource(images.get(i));
+                }
+            }
+
+        }
+
         // Creating an ID list of buttons to allocate correct buttons with proper values
-        /*idButton[] = {R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9,
+        int idButton[] = {R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9,
                 R.id.btn10, R.id.btn11, R.id.btn12, R.id.btn13, R.id.btn14, R.id.btn15, R.id.btn16, R.id.btn17, R.id.btn18,
-                R.id.btn19, R.id.btn20};*/
+                R.id.btn19, R.id.btn20};
+
         // To ensure the amount of cards are the same as the number the user requested
         for(int i = 0; i < idButton.length; i++){
             if(i > gameSize - 1){
@@ -167,6 +213,7 @@ public class GameActivity extends AppCompatActivity {
                                 buttons[lastClicked].setClickable(false);
                                 flags[lastClicked] = 1;
                                 flags[firstClicked] = 1;
+                                System.out.println(Arrays.toString(flags));
                                 clicks = 0;
                                 firstImage = 0;
                                 secondImage = 0;
@@ -175,7 +222,6 @@ public class GameActivity extends AppCompatActivity {
 
                                 // Prompt the dialogue box when the player completed the game
                                 if(counter == gameSize){
-                                    //gotoEndScreen();
                                     promptUsername();
                                 }
                                 tvScore.setText(String.valueOf(points));
@@ -183,6 +229,7 @@ public class GameActivity extends AppCompatActivity {
                         }
                     }
                 });
+
 
                 // Button clicked the retry a new match after choosing an incorrect match
                 btnTryAgain.setOnClickListener(new View.OnClickListener() {
@@ -202,13 +249,6 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
-        btnHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goHomeActivity();
-                resetGame();
-            }
-        });
 
         // Button clicked the reveal all answers
         btnEndGame.setOnClickListener(new View.OnClickListener() {
@@ -217,9 +257,8 @@ public class GameActivity extends AppCompatActivity {
                 for(int i = 0; i< idButton.length; i++){
                     int finalI = i;
                     buttons[i].setImageResource(images.get(finalI));
+                    buttons[i].setClickable(false);
                 }
-                //gotoEndScreen();
-                //promptUsername();
             }
         });
 
@@ -232,47 +271,36 @@ public class GameActivity extends AppCompatActivity {
         });
 
         // To ensure the game instance stays the same through different orientation
-        if(savedInstanceState != null){
-            savedInstanceState.getInt("points");
-            savedInstanceState.getInt("counter");
-            tvScore.setText(String.valueOf(points));
-            buttons = (ImageButton[]) savedInstanceState.getSerializable("buttons");
-            images = savedInstanceState.getIntegerArrayList("images");
-            flags = savedInstanceState.getIntArray("flags");
-            check = savedInstanceState.getBoolean("check");
 
-            for(int i = 0; i < buttons.length; i++){
-                if (flags[i] == 1){
-                    buttons[i].setImageResource(images.get(i));
-                    buttons[i].setClickable(false);
-                }
-                if (selectedCards[i] == 1){
-                    buttons[i].setImageResource(images.get(i));
-                }
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goHomeActivity();
+                resetGame();
             }
-        }
+        });
+
+
+
     }
 
     // To allow player's input as their name to save along with their score
     private void promptUsername() {
-        final EditText etUsername = new EditText(GameActivity.this);
 
+        final EditText etUsername = new EditText(GameActivity.this);
         AlertDialog alertDialog = new AlertDialog.Builder(GameActivity.this).create();
         alertDialog.setTitle("Please put in your username");
         alertDialog.setView(etUsername);
-       //etUsername.setInputType(InputType.TYPE_CLASS_TEXT);
-
-        //Editable number = etNumber.getText();
 
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 user = etUsername.getText().toString();
                 gotoEndScreen();
-
-                //afterTextChanged(number);
             }
         });
+        alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
+
     }
 
     // To take user to End Screen after completing the game
@@ -309,35 +337,26 @@ public class GameActivity extends AppCompatActivity {
         gameSize = Integer.parseInt(number.toString());
         if (gameSize >= 4 && gameSize <=20){
             if(gameSize%2 == 0) {
-                counter = 0;
                 clicks = 0;
+                counter = 0;
                 firstClicked = -1;
                 lastClicked = -1;
                 firstImage = 0;
                 secondImage = 0;
                 points = 0;
-                counter = 0;
-                int idButton1[] = {R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9,
-                        R.id.btn10, R.id.btn11, R.id.btn12, R.id.btn13, R.id.btn14, R.id.btn15, R.id.btn16, R.id.btn17, R.id.btn18,
-                        R.id.btn19, R.id.btn20};
-
-                for(int i = 0; i < idButton1.length; i++){
-                    idButton[i] = idButton1[i];
-                }
-
                 check = false;
-                Collections.sort(images);
-                for(int i = 0; i < buttons.length; i++){
-                    flags[i] = 0;
-                    selectedCards[i] = 0;
-                }
+                images.clear();
+                Arrays.fill(buttons,null);
+                Arrays.fill(flags,0);
+                Arrays.fill(selectedCards,0);
                 goGameActivity();
+
             } else {
-                Toast.makeText(this, "OUT OF RANGE AND TRY AGAIN", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "INVALID RESPONSE AND TRY AGAIN", Toast.LENGTH_SHORT).show();
                 restartGameActivity();
             }
         } else{
-            Toast.makeText(this, "OUT OF RANGE AND TRY AGAIN", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "INVALID RESPONSE AND TRY AGAIN", Toast.LENGTH_SHORT).show();
             restartGameActivity();
         }
     }
@@ -370,6 +389,7 @@ public class GameActivity extends AppCompatActivity {
         Arrays.fill(selectedCards,0);
         gameSize = 0;
         reset = true;
+        images.clear();
     }
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
