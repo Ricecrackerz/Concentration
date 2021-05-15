@@ -55,11 +55,7 @@ public class EndScreenActivity extends AppCompatActivity {
     boolean save = true;
     boolean reset1 = true;
 
-    //int userPoints[] ={'0', '0', '0'};
-    //String userNames[] = {"ABC", "ABC", "ABC"};
 
-    ArrayList<Integer> userPoints = new ArrayList<>();
-    ArrayList<String> userNames = new ArrayList<>();
 
 
     @Override
@@ -89,9 +85,6 @@ public class EndScreenActivity extends AppCompatActivity {
         tvPoints.setText(String.valueOf(points));
         tvUsername.setText(String.valueOf(user));
 
-
-        userPoints.add(points);
-        userNames.add(user);
 
        switch(gameSize){
            case 4:
@@ -125,81 +118,15 @@ public class EndScreenActivity extends AppCompatActivity {
                break;
        }
 
-       /* case 4:
-        file = new File(getFilesDir(),"scores4.txt");
-        break;
-        case 6:
-        file = new File(getFilesDir(),"scores6.txt");
-        break;
-        case 8:
-        file = new File(getFilesDir(),"scores8.txt");
-        break;
-        case 10:
-        file = new File(getFilesDir(),"scores10.txt");
-        break;
-        case 12:
-        file = new File(getFilesDir(),"scores12.txt");
-        break;
-        case 14:
-        file = new File(getFilesDir(),"scores14.txt");
-        break;
-        case 16:
-        file = new File(getFilesDir(),"scores16.txt");
-        break;
-        case 18:
-        file = new File(getFilesDir(),"scores18.txt");
-        break;
-        case 20:
-        file = new File(getFilesDir(),"scores20.txt");
-        break;
-        default:
-        break;*/
-
         String separate = ", ";
         String space = "\n";
 
-        /*SharedPreferences settings = getSharedPreferences("GAME", Context.MODE_PRIVATE);
-        int highScore = settings.getInt("HIGH_SCORE", 0);
-        if (points > highScore){
-
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putInt("HIGH_SCORE", points);
-            editor.putString("USER", user);
-            editor.commit();
-
-            System.out.println(points);
-            System.out.println(user);
-        }
-
-        for(int i = 0; i < userPoints.size(); i++){
-            if(points > userPoints.get(i)){
-                index = i;
-                newScore = points;
-                break;
-            }
-        }
-        userNames.add(index, user);
-        userPoints.add(index, newScore);
-        System.out.println(points);*/
 
         FileOutputStream fos = null;
 
         try {
 
             fos = openFileOutput(String.valueOf(file), MODE_APPEND);
-//            fos.write(userNames.get(0).getBytes());
-//            fos.write(separate.getBytes());
-//            fos.write(String.valueOf(userPoints.get(0)).getBytes());
-//            fos.write(space.getBytes());
-//            fos.write(userNames.get(1).getBytes());
-//            fos.write(separate.getBytes());
-//            fos.write(String.valueOf(userPoints.get(1)).getBytes());
-//            fos.write(space.getBytes());
-//            fos.write(userNames.get(2).getBytes());
-//            fos.write(separate.getBytes());
-//            fos.write(String.valueOf(userPoints.get(2)).getBytes());
-//            fos.write(space.getBytes());
-            //fos.write(defaultScores.getBytes());
             fos.write(user.getBytes());
             fos.write(separate.getBytes());
             fos.write(String.valueOf(points).getBytes());

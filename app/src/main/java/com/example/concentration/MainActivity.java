@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/** Students: Lan Nguyen, Vincent Hoang, Bryant Hoang, Nhi Nguyen **/
+
 public class MainActivity extends AppCompatActivity {
 
     private Button btnGame;
